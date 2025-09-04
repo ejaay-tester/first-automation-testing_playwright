@@ -23,7 +23,7 @@ jobs:
       # Added step for Jira Xray integration
       # -----------------------------------------------
       - name: Import results to Xray
-        uses: mikepenz/xray-action@latest
+        uses: mikepenz/xray-action@v3
         with:
           username: ${{ secrets.XRAY_CLIENT_ID }}
           password: ${{ secrets.XRAY_CLIENT_SECRET }}
