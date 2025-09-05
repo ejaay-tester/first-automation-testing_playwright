@@ -30,10 +30,7 @@ jobs:
 
       - name: Install Playwright Browsers (if not cached)
         # This step will only download the browsers if the cache is a miss.
-        # This step no longer needs the env variable, but it's fine to keep it.
         run: npx playwright install --with-deps
-        env:
-        PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
 
       - name: Run Playwright tests
         run: npx playwright test
