@@ -31,7 +31,7 @@ jobs:
           PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
 
       - name: Run Playwright tests
-        run: npx playwright test --project=webkit
+        run: npx playwright test
       # -----------------------------------------------
       # Added step for Jira Xray integration
       # -----------------------------------------------
