@@ -9,6 +9,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      # Set the browser path for the entire job
+      PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,15 +23,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-browsers-${{ hashFiles('**/package-lock.json') }}
+          key: ${{runner.os}}-playwright-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright Browsers (if not cached)
+        # This step will only download the browsers if the cache is a miss.
+        # This step no longer needs the env variable, but it's fine to keep it.
         run: npx playwright install --with-deps
         env:
-          PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
+        PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
 
       - name: Run Playwright tests
         run: npx playwright test
